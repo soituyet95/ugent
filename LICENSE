@@ -1,52 +1,101 @@
-Ugent Community License (UCL) v1.0
+Ugent Community Source License v1.0
 
 Copyright (c) 2026 Ugent Project
 
-1. Permission Grant
+This license allows broad community and personal use of Ugent while requiring
+separate written permission for commercial use.
 
-Permission is hereby granted to any individual or organization to use, copy, modify, and distribute this software for:
+1. Definitions
 
-- Personal use
-- Educational purposes
-- Research
-- Non-commercial community projects
+"Software" means the Ugent source code, documentation, examples, and related
+materials distributed with this license.
 
-2. Restrictions
+"Non-Commercial Use" means use that is not primarily intended for commercial
+advantage, monetary compensation, paid services, revenue generation, or business
+operations.
 
-Without prior written permission from the Ugent Project owner, you may NOT:
+"Commercial Use" includes, without limitation:
+- selling, licensing, sublicensing, or reselling the Software;
+- offering the Software, a modified version, or a substantially similar product
+  as a paid service, hosted service, SaaS, consulting deliverable, or managed
+  service;
+- using the Software in production to support a business, paid product, internal
+  commercial workflow, customer-facing service, or revenue-generating activity;
+- white-labeling, rebranding, or embedding the Software in a commercial product;
+- creating a competing commercial product based substantially on the Software.
 
-- Sell the software
-- Offer the software as a paid service (SaaS)
-- Rebrand or white-label the software
-- Use the software in commercial production environments
-- Resell modified versions of the software
-- Remove copyright notices or project attribution
-- Create competing commercial products based substantially on Ugent source code
+2. Permission Grant
 
-3. Attribution
+Subject to this license, you may use, copy, modify, and distribute the Software
+for:
+- personal projects;
+- education and learning;
+- research;
+- evaluation;
+- non-commercial community projects;
+- non-commercial internal experiments.
 
-Any public or private use of modified versions must retain:
+3. Commercial Use Requires Permission
 
-- Original copyright notice
-- Reference to the Ugent Project
-- Link to the original repository
+You may not make Commercial Use of the Software without prior written permission
+from the Ugent Project owner.
 
-4. Trademark
+Commercial licenses, partnership terms, or written exceptions may be granted
+separately. A separate written agreement overrides this license only for the
+specific rights granted in that agreement.
 
-“Ugent”, its logos, branding, and related assets are property of the Ugent Project and may not be used commercially without permission.
+4. Distribution Requirements
 
-5. Contributions
+If you distribute the Software or a modified version, you must:
+- include this license;
+- retain copyright notices;
+- retain references to the Ugent Project;
+- clearly mark material modifications you made;
+- not imply that your modified version is endorsed by the Ugent Project unless
+  you have written permission.
 
-Any contributions submitted to the project grant the Ugent Project a perpetual, worldwide, non-exclusive right to use, modify, and distribute the contribution.
+5. Attribution
 
-6. Warranty Disclaimer
+Public use, redistribution, or publication of the Software or modified versions
+must include reasonable attribution to the Ugent Project and a link to the
+original repository when available.
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+6. Trademarks
 
-7. Termination
+The names "Ugent", "Ugent Project", logos, branding, and related marks are not
+licensed for commercial use. You may not use them to suggest endorsement,
+sponsorship, or official status without written permission.
 
-Violation of these terms automatically terminates your rights under this license.
+7. Contributions
 
-8. Future Commercial Licensing
+By submitting a contribution to the Ugent Project, you grant the Ugent Project a
+perpetual, worldwide, non-exclusive, royalty-free right to use, reproduce,
+modify, distribute, publicly perform, publicly display, sublicense, and otherwise
+exploit that contribution as part of the Software.
 
-The Ugent Project reserves the right to offer separate commercial licenses in the future.
+You represent that you have the right to submit the contribution and that it does
+not knowingly violate third-party rights.
+
+8. No Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+9. Limitation of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE AUTHORS, COPYRIGHT HOLDERS, AND
+PROJECT MAINTAINERS SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM OR RELATED TO THE SOFTWARE OR ITS USE.
+
+10. Termination
+
+Your rights under this license terminate automatically if you violate its terms.
+After termination, you must stop using, copying, modifying, and distributing the
+Software unless you receive written permission from the Ugent Project owner.
+
+11. Future Licensing
+
+The Ugent Project may offer different licenses, including commercial licenses, in
+the future. Such future licenses do not change rights already granted under this
+license unless you choose to accept the new terms.
