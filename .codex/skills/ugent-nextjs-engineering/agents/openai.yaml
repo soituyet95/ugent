@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ugent Next.js Engineering"
+  short_description: "Build and review Ugent Next.js features"
+  default_prompt: "Use $ugent-nextjs-engineering to implement this Next.js feature following the Ugent project conventions."

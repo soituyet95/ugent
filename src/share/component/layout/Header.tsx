@@ -14,6 +14,9 @@ export function Header() {
           <Link className="cug-header-link" href="/flows">
             Flows
           </Link>
+          <Link className="cug-header-link" href="/my-info">
+            My CV
+          </Link>
           <Link className="cug-header-link" href="/settings">
             Settings
           </Link>

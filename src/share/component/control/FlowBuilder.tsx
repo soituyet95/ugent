@@ -25,18 +25,66 @@ import {
   type DragEvent
 } from "react";
 import type { FlowModule, FlowModuleType } from "@/share/ultil/flowConstants";
+import {
+  ConditionNode,
+  type ConditionFlowNode
+} from "@/share/component/module/ConditionNode";
+import { ModuleConfigFields } from "@/share/component/module/ModuleConfigFields";
 
 type FlowNodeData = {
   label: string;
   description: string;
   type: FlowModuleType;
+  config: Record<string, string>;
 };
 
 type FlowNode = Node<FlowNodeData, "flowNode">;
+type BuilderNode = FlowNode | ConditionFlowNode;
 
 type FlowBuilderProps = {
   modules: FlowModule[];
 };
+
+function createDefaultConfig(flowModule: FlowModule) {
+  return Object.fromEntries(
+    (flowModule.fields ?? []).map((field) => [
+      field.key,
+      field.control === "select" ? field.options?.[0]?.value ?? "" : ""
+    ])
+  );
+}
+
+function createBuilderNode(
+  flowModule: FlowModule,
+  id: string,
+  position: { x: number; y: number }
+): BuilderNode {
+  if (flowModule.type === "condition") {
+    return {
+      id,
+      type: "conditionNode",
+      position,
+      data: {
+        label: flowModule.label,
+        description: flowModule.description,
+        type: "condition",
+        config: createDefaultConfig(flowModule)
+      }
+    };
+  }
+
+  return {
+    id,
+    type: "flowNode",
+    position,
+    data: {
+      label: flowModule.label,
+      description: flowModule.description,
+      type: flowModule.type,
+      config: createDefaultConfig(flowModule)
+    }
+  };
+}
 
 const initialNodes: FlowNode[] = [
   {
@@ -46,7 +94,8 @@ const initialNodes: FlowNode[] = [
     data: {
       label: "Start",
       description: "Nhan input dau vao",
-      type: "start"
+      type: "start",
+      config: {}
     }
   },
   {
@@ -56,7 +105,8 @@ const initialNodes: FlowNode[] = [
     data: {
       label: "Output",
       description: "Tra ket qua cuoi",
-      type: "output"
+      type: "output",
+      config: {}
     }
   }
 ];
@@ -85,15 +135,19 @@ function FlowNodeCard({ data, selected }: NodeProps<FlowNode>) {
 }
 
 function FlowCanvas({ modules }: FlowBuilderProps) {
-  const [nodes, setNodes, onNodesChange] = useNodesState<FlowNode>(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState<BuilderNode>(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const { screenToFlowPosition } = useReactFlow();
   const selectedNode = nodes.find((node) => node.id === selectedNodeId);
+  const selectedModule = modules.find(
+    (module) => module.type === selectedNode?.data.type
+  );
 
   const nodeTypes = useMemo(
     () => ({
-      flowNode: FlowNodeCard
+      flowNode: FlowNodeCard,
+      conditionNode: ConditionNode
     }),
     []
   );
@@ -138,16 +192,11 @@ function FlowCanvas({ modules }: FlowBuilderProps) {
 
       setNodes((currentNodes) => [
         ...currentNodes,
-        {
-          id: `${flowModule.type}-${Date.now()}`,
-          type: "flowNode",
-          position,
-          data: {
-            label: flowModule.label,
-            description: flowModule.description,
-            type: flowModule.type
-          }
-        }
+        createBuilderNode(
+          flowModule,
+          `${flowModule.type}-${Date.now()}`,
+          position
+        )
       ]);
     },
     [modules, screenToFlowPosition, setNodes]
@@ -163,19 +212,10 @@ function FlowCanvas({ modules }: FlowBuilderProps) {
 
       setNodes((currentNodes) => [
         ...currentNodes,
-        {
-          id: nodeId,
-          type: "flowNode",
-          position: {
-            x: selectedNode.position.x + 260,
-            y: selectedNode.position.y
-          },
-          data: {
-            label: flowModule.label,
-            description: flowModule.description,
-            type: flowModule.type
-          }
-        }
+        createBuilderNode(flowModule, nodeId, {
+          x: selectedNode.position.x + 260,
+          y: selectedNode.position.y
+        })
       ]);
 
       setEdges((currentEdges) => [
@@ -223,7 +263,33 @@ function FlowCanvas({ modules }: FlowBuilderProps) {
                   ...node.data,
                   [field]: value
                 }
-              }
+              } as BuilderNode
+            : node
+        )
+      );
+    },
+    [selectedNode, setNodes]
+  );
+
+  const updateSelectedNodeConfig = useCallback(
+    (key: string, value: string) => {
+      if (!selectedNode) {
+        return;
+      }
+
+      setNodes((currentNodes) =>
+        currentNodes.map((node) =>
+          node.id === selectedNode.id
+            ? {
+                ...node,
+                data: {
+                  ...node.data,
+                  config: {
+                    ...node.data.config,
+                    [key]: value
+                  }
+                }
+              } as BuilderNode
             : node
         )
       );
@@ -292,6 +358,12 @@ function FlowCanvas({ modules }: FlowBuilderProps) {
                   value={selectedNode.data.description}
                 />
               </label>
+
+              <ModuleConfigFields
+                fields={selectedModule?.fields ?? []}
+                onChange={updateSelectedNodeConfig}
+                values={selectedNode.data.config}
+              />
 
               <div className="cug-flow-field">
                 <span className="cug-flow-field-label">Them node moi</span>
